@@ -24,5 +24,10 @@ namespace FPAPI
                 return new NListArguments<T>(list);
             }
         }
+
+        public static IfThen<T> If(Func<dynamic,Boolean> cond)
+        {
+            return new IfThen<T>(cond);
+        }
     }
 }
