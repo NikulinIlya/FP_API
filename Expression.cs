@@ -29,5 +29,15 @@ namespace FPAPI
         {
             return new IfThen<T>(cond);
         }
+
+        public static AnyExpr<T,R> Any<R>(List<T> list)
+        {
+            return new AnyExpr<T,R>(list);
+        }
+
+        public static AllExpr<T> All(List<T> list)
+        {
+            return new AllExpr<T>(list);
+        }
     }
 }

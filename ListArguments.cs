@@ -8,7 +8,7 @@ namespace FPAPI
 {
     class ListArguments<T>
     {
-        List<T> args;
+        private List<T> args;
 
         public ListArguments(List<T> arg)
         {
@@ -31,32 +31,18 @@ namespace FPAPI
             return new ListArguments<R>(result);
         }
 
+        
+
+        public ListArguments<R> Fold<R>(Func<T, R> func)
+        {
+
+        }
+
+
+
         public List<T> ToList()
         {
             return args;
-        }
-
-        public OneThen<T> If(Func<bool> expr)
-        {
-            bool res = expr();
-            return new OneThen<T>(this, res);
-        }
-    }
-
-    class OneThen<T>
-    {
-        public OneThen(ListArguments<T> a, bool ex)
-        {
-            arg = a;
-            expr = ex;
-        }
-        ListArguments<T> arg;
-        bool expr;
-
-        public dynamic Then<Tres>(Func<T, Tres> func)
-        {
-            return null;
-
         }
     }
 }
