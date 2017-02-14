@@ -43,11 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllExpr.cs" />
+    <Compile Include="AnyExpr.cs" />
+    <Compile Include="ElseExpression.cs" />
     <Compile Include="Expression.cs" />
+    <Compile Include="IfThen.cs" />
     <Compile Include="ListArguments.cs" />
     <Compile Include="NListArguments.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThenElse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
