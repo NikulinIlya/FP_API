@@ -33,9 +33,17 @@ namespace FPAPI
 
         
 
-        public ListArguments<R> Fold<R>(Func<T, R> func)
+        public ListArguments<T> Fold(Func<T, T, T> func)
         {
-
+            using (IEnumerator<T> e = args.GetEnumerator())
+            {
+                //if (!e.MoveNext()) throw Error.NoElements();
+                T result = e.Current;
+                while (e.MoveNext()) result = func(result, e.Current);
+                List<T> resList = new List<T>(1);
+                resList.Add(result);
+                return new ListArguments<T>(resList);
+            }
         }
 
 

@@ -14,9 +14,18 @@ namespace FPAPI
             arg = a;
         }
 
-        public ListArguments<T> Zip()
+        public ListArguments<Tuple<T>> Zip()
         {
-           
+            int count = arg.Count();
+            List<Tuple<T>> res = new List<Tuple<T>>();
+
+            int size = arg[0].Count();
+            for (var i = 1; i < count; i++)
+            {
+                
+            }
+
+            return new ListArguments<Tuple<T>>(res);
         }
 
         public ListArguments<R> FlatMap<R>(Func<T, R> func)
