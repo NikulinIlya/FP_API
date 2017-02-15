@@ -16,10 +16,16 @@ namespace FPAPI
             this.ifThener = ifThener;
         }
 
-        public  ElseExpression<R> Else(R elser)
+        public  R Else(R elser)
         {
             this.elser = elser;
-            return new ElseExpression<R>(this);
+            return compute();
+        }
+
+        private R compute()
+        {
+            var condValue = ifThener.getCondition().execute();
+            return default(R);
         }
     }
 }

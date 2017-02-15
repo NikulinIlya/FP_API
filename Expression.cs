@@ -9,7 +9,7 @@ namespace FPAPI
     class Expression<T>
     {
 
-        public static dynamic Value(List<T> arg1, params List<T>[] lists)
+        public static IArguments Value(List<T> arg1, params List<T>[] lists)
         {
             if (lists == null || lists.Length == 0)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FPAPI
 {
-    class ListArguments<T>
+    class ListArguments<T> : IArguments
     {
         private List<T> args;
 

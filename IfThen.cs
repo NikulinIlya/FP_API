@@ -1,4 +1,4 @@
-﻿using System;
+﻿//using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +8,10 @@ namespace FPAPI
 {
     class IfThen<R>
     {
-        private Func<dynamic, Boolean> cond;
+        private IFunctionType<bool> cond;
         private R thener;
 
-        public IfThen(Func<dynamic, Boolean> cond)
+        public IfThen(IFunctionType<bool> cond)
         {
             this.cond = cond;
         }
@@ -20,6 +20,16 @@ namespace FPAPI
         {
             this.thener = thenexpr;
             return new ThenElse<R>(this);
+        }
+
+        public IFunctionType<bool> getCondition()
+        {
+            return cond;
+        }
+
+        public R getThenExpression()
+        {
+            return thener;
         }
     }
 }
