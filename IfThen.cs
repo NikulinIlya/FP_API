@@ -9,14 +9,14 @@ namespace FPAPI
     class IfThen<R>
     {
         private IFunctionType<bool> cond;
-        private R thener;
+        private IFunctionType<R> thener;
 
         public IfThen(IFunctionType<bool> cond)
         {
             this.cond = cond;
         }
 
-        public ThenElse<R> Then(R thenexpr)
+        public ThenElse<R> Then(IFunctionType<R> thenexpr)
         {
             this.thener = thenexpr;
             return new ThenElse<R>(this);
@@ -27,7 +27,7 @@ namespace FPAPI
             return cond;
         }
 
-        public R getThenExpression()
+        public IFunctionType<R> getThenExpression()
         {
             return thener;
         }

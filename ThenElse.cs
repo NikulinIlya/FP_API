@@ -9,14 +9,14 @@ namespace FPAPI
     class ThenElse<R>
     {
         private IfThen<R> ifThener;
-        private R elser;
+        private IFunctionType<R> elser;
 
         public ThenElse(IfThen<R> ifThener)
         {
             this.ifThener = ifThener;
         }
 
-        public  R Else(R elser)
+        public R Else(IFunctionType<R> elser)
         {
             this.elser = elser;
             return compute();
@@ -24,8 +24,14 @@ namespace FPAPI
 
         private R compute()
         {
-            var condValue = ifThener.getCondition().execute();
-            return default(R);
+            Boolean condValue = ifThener.getCondition().execute();
+            R result;
+            if (condValue)
+                result = ifThener.getThenExpression().execute();
+            else
+                result = elser.execute();
+
+            return result;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FPAPI
     class Expression<T>
     {
 
-        public static IArguments Value(List<T> arg1, params List<T>[] lists)
+        public static dynamic Value(List<T> arg1, params List<T>[] lists)
         {
             if (lists == null || lists.Length == 0)
             {
@@ -25,9 +25,9 @@ namespace FPAPI
             }
         }
 
-        public static IfThen<T> If(Func<dynamic,Boolean> cond)
+        public static IfThen<R> If<R>(IFunctionType<Boolean> cond)
         {
-            return new IfThen<T>(cond);
+            return new IfThen<R>(cond);
         }
 
         public static AnyExpr<T,R> Any<R>(List<T> list)
