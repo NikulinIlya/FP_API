@@ -15,9 +15,10 @@ namespace FPAPI
             farg = func;
         }
 
-        public FunctionArguments<T, R2> Then< R2>(Func<R, R2> func)
+        public FunctionArguments<T, R2> Then<R2>(Func<R, R2> g)
         {
-            return new FunctionArguments<R,R2>(x => func(farg(x)));
+            //return new FunctionArguments<R,R2>((x) => g(farg(x)));
+            return null;
         }
 
         public FunctionArguments<T,R> Rec()

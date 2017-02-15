@@ -14,7 +14,7 @@ namespace FPAPI
 
         public ListArguments<R> Then(Func<T,R> flist)
         {
-
+            return null;
         }
     }
 }

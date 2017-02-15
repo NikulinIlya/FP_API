@@ -47,6 +47,7 @@
     <Compile Include="AnyExpr.cs" />
     <Compile Include="ElseExpression.cs" />
     <Compile Include="Expression.cs" />
+    <Compile Include="FunctionArguments.cs" />
     <Compile Include="IfThen.cs" />
     <Compile Include="ListArguments.cs" />
     <Compile Include="NListArguments.cs" />
