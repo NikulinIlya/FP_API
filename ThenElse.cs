@@ -24,14 +24,31 @@ namespace FPAPI
 
         private R compute()
         {
-            Boolean condValue = ifThener.getCondition().execute();
+            var resCond = Task.Run(() =>    
+            {
+               return ifThener.getCondition().execute();
+            });
+            resCond.Wait();
+            Boolean condValue = resCond.Result;
             R result;
             if (condValue)
-                result = ifThener.getThenExpression().execute();
+            {
+                var resThen = Task.Run(() =>
+                {
+                    return ifThener.getThenExpression().execute();
+                });
+                resThen.Wait();
+                return resThen.Result;
+            }
             else
-                result = elser.execute();
-
-            return result;
+            {
+                var resElse = Task.Run(() =>
+                {
+                    return elser.execute();
+                });
+                resElse.Wait();
+                return resElse.Result;
+            }
         }
     }
 }
