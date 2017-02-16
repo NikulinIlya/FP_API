@@ -39,14 +39,19 @@ namespace FPAPI
         public ListArguments<R> FlatMap<R>(Func<T, R> func)
         {
             List<T> result = arg[0];
-            for (var i = 1; i< arg.Count; i++)
-            {
-                result.AddRange(arg[i]);
-            }
-
             List<R> results = new List<R>();
-            foreach (var t in result)
-                results.Add(func(t));
+            var res = Task.Run(() =>
+            {
+                for (var i = 1; i < arg.Count; i++)
+                {
+                    result.AddRange(arg[i]);
+                }
+
+                foreach (var t in result)
+                    results.Add(func(t));
+            });
+            res.Wait();
+            
             return new ListArguments<R>(results);
         }
     }
