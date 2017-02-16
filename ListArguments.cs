@@ -19,30 +19,46 @@ namespace FPAPI
         public ListArguments<T> JoinValues(List<T> args2)
         {
             List<T> result = new List<T>();
-            result.AddRange(args);
-            result.AddRange(args2);
-            return new ListArguments<T>(result);
+            Task.Run(() =>
+            {
+                result.AddRange(args);
+                result.AddRange(args2);
+            });
+           return new ListArguments<T>(result);
         }
 
         public ListArguments<R> Map<R>(Func<T, R> func)
         {
             List<R> result = new List<R>();
-            foreach (var t in args)
-                result.Add(func(t));
+            var res = Task.Run(() =>
+            {
+                foreach (var t in args)
+                    result.Add(func(t));
+            });
+            res.Wait();
+                          
             return new ListArguments<R>(result);
         }
 
         public ListArguments<T> Fold(Func<T, T, T> func)
         {
-            using (IEnumerator<T> e = args.GetEnumerator())
+            List<T> resList = new List<T>(1);
+            var list = Task.Run(() =>
             {
-                T result = e.Current;
-                while (e.MoveNext()) result = func(result, e.Current);
-                List<T> resList = new List<T>(1);
-                resList.Add(result);
-                return new ListArguments<T>(resList);
-            }
+                using (IEnumerator<T> e = args.GetEnumerator())
+                {
+                    T result = e.Current;
+                    
+                    while (e.MoveNext()) result = func(result, e.Current);
+                        resList.Add(result);
+                }
+
+            });
+
+            list.Wait();
+            return new ListArguments<T>(resList);
         }
+        
         
         public List<T> ToList()
         {
